@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span id="span1" style="font-size: 36px;"></span>
+    <h1>Login Page</h1>
+    <form action="/check" method="post">
+        <input type="text" placeholder="Enter Your Email" name="email">
+        <input type="password" name="password">
+        <input type="submit" value="Login">
+    </form>
+    <script>
+        let request=new XMLHttpRequest();
+        request.open('POST','/getdata');
+        request.send();
+        request.addEventListener("load",function(){
+            console.log(this.responseText);
+            if(JSON.parse(this.responseText)==false){
+                let element=document.getElementById("span1");
+                element.innerHTML="Username or password is incorrect";
+                setTimeout(function(){
+                    element.innerHTML=''
+                },3000)
+            }
+        })
+    </script>
+</body>
+</html>
