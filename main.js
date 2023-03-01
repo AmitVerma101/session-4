@@ -3,7 +3,7 @@ const app = express()
 const fs=require('fs');
 const bodyParser = require('body-parser');
 const session = require('express-session')
-const port = 3000
+const port = 4000
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -140,13 +140,13 @@ app.post('/storeResult',(req,res)=>{
     })
 })
 app.get("/result",(req,res)=>{
-    console.log(req.session);
-    console.log("hello");
-    console.log("I am working in the result page");
-       
-        
-       
+  if(req.session.email==undefined){
+    res.redirect('/')
+  }
+  else {  
     res.sendFile(__dirname+"/public/result/index.html");
+  }
+  
 })
 app.post("/check",(req,res)=>{
             // console.log(req.body);
